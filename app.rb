@@ -8,16 +8,40 @@ BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get("/") do
   erb(:homepage)
-  "
-  <h1>Welcome to Rock Paper Scissors!</h1>
-  <p>Define some routes in app.rb</p>
-  "
 end
 
 get("/rock") do
-  hand = rand(1..6)
-  second_die = rand(1..6)
-  sum = first_die + second_die
-  @outcome = "We played Rock!and a #{second_die} for a total of #{sum}."
+  @hand = ["rock","paper","scissors"].sample
+  if @hand == "rock"
+    @outcome = "We tied!"
+  elsif @hand == "scissors"
+    @outcome = "We won!"
+  else
+    @outcome = "We lost!"
+  end
   erb(:rock)
+end
+
+get("/paper") do
+  @hand = ["rock","paper","scissors"].sample
+  if @hand == "rock"
+    @outcome = "We won!"
+  elsif @hand == "scissors"
+    @outcome = "We lost!"
+  else
+    @outcome = "We tied!"
+  end
+  erb(:paper)
+end
+
+get("/scissors") do
+  @hand = ["rock","paper","scissors"].sample
+  if @hand == "rock"
+    @outcome = "We lost!"
+  elsif @hand == "scissors"
+    @outcome = "We tied!"
+  else
+    @outcome = "We won!"
+  end
+  erb(:scissors)
 end
